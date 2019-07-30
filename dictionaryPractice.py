@@ -12,6 +12,6 @@ while moreNames:
             moreNames = False
             print(nameOccurence)
         else:
-            names.append(name)
+            names.append(name.title())
             for name in names:
                 nameOccurence[name] = names.count(name)
