@@ -1,25 +1,18 @@
-# Request for file input
-# Read/Stream the contents of the file
-# Spit the read lines and push to the list
-# Loop through the list, find unique words. For every repeated word, 
-# the key is the word and the value is the number of times it appears in the list.
+wordList = list()
 wordDict = dict()
-wordsList = list()
-maxDict = dict()
-
+maxCount = dict()
 
 newFile = input('Enter the file name: ')
-fhand = open(newFile).read()
-wordList = fhand.rstrip().split()
+with open(newFile) as f:
+    wordList = f.read().rstrip().split()
 
-for word in wordList:
-    wordDict[word] = wordList.count(word)
+# Learnt about dictionar comprehension, rather than looping through a dict(), 
+# this is a more pythonic way of doing this.
+wordDict = { word : wordList.count(word) for word in wordList }
 
-# This section finds the word that appears the most in the dictionary 
-# and prints it. It gets the key using the max method, then assigns 
-# the value by calling the key on the maxDict.
+# Get key with the most appearances
+max = max(wordDict, key=wordDict.get)
 
-key = max(wordDict)
-maxDict[key] = wordDict.get(key)
-
-print(maxDict)
+# Find the value of the key in the dictionary [This should not work but it does]
+maxCount[max] = wordDict[max]
+print(maxCount)
